@@ -669,7 +669,12 @@ class TRAINER():
                 denoised_image= processer.process_image(data)
 
             # save image
-            output_path = os.path.join(self.images_path, self.model, os.path.basename(image_path))
+            if os.path.isfile(self.images_path):
+                output_path = os.path.join(os.path.dirname(self.images_path), self.model, os.path.basename(image_path))
+
+            elif os.path.isdir(self.images_path):
+                output_path = os.path.join(self.images_path, self.model, os.path.basename(image_path))
+
             denoised_image.save(output_path)
 
             # convert to YCbCr
