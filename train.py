@@ -286,8 +286,12 @@ class TRAINER():
 
             # save weights every 50 epochs
             if (epoch > 0) and (epoch % 50 == 0):
-                model_file = 'models/model' + '_' + self.model + '_' + self.noise_type + str(int(self.sigma)) + '_' + str(epoch) +'.pth'
-                torch.save(current_weights, model_file)
+                if self.noise_type == None:
+                    model_file = 'models/model' + '_' + self.model + '_' + 'G' + str(int(self.sigma)) + '_' + str(epoch) +'.pth'
+                    torch.save(current_weights, model_file)
+                else:
+                    model_file = 'models/model' + '_' + self.model + '_' + self.noise_type + str(int(self.sigma)) + '_' + str(epoch) +'.pth'
+                    torch.save(current_weights, model_file)
 
             # iterate over train and validation phases
             for phase in ('train', 'validation'):
@@ -398,7 +402,10 @@ class TRAINER():
         model.load_state_dict(current_weights)
 
         # save last model
-        model_file = 'models/model' + '_' + self.model + '_' +  self.noise_type + str(int(self.sigma)) + '.pth'
+        if self.noise_type == None:
+            model_file = 'models/model' + '_' + self.model + '_' +  'G' + str(int(self.sigma)) + '.pth'
+        else:
+            model_file = 'models/model' + '_' + self.model + '_' +  self.noise_type + str(int(self.sigma)) + '.pth'
         torch.save(current_weights, model_file)
 
         # print location of model weights
