@@ -121,6 +121,10 @@ class LOADER():
         # convert image to array
         image = np.array(image)
 
+        # add no noise
+        if self.noise_type == None:
+            label = image
+        
         # add random Gaussian noise to label
         if self.noise_type == 'G':
             noise = np.rint(np.random.normal(0, self.sigma, (self.input_size, self.input_size, self.n_channels)))
