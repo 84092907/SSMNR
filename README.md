@@ -75,7 +75,7 @@ Options available for denoising are:
   - default: *32*      
 * `--use_cuda`:
   Use of GPU or CPU
-  - default: *32*
+  - default: *True*
 
 #### Evaluation
 
